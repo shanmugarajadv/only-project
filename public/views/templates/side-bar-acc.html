@@ -1,0 +1,72 @@
+<div data-ng-controller="mainController" class="column col-sm-3" id="sidebar">
+    <a href="#/addSuite">
+        <button id="add-suite" class="btn btn-primary"><i class="glyphicon glyphicon-briefcase pull-left"></i> <span class="col-sm-3"> Article Management </span></button>
+    </a>
+    <accordion close-others="oneAtATime">
+        <accordion-group is-open="status.isFirstOpen" is-disabled="status.isFirstDisabled">
+            <accordion-heading><h5 class="pan-heading"><img src="/images/browser.png" style="margin-right: 5px;"/>
+                Client-Side Technologies </h5></accordion-heading>
+            <li class="nav-header col-sm-12">
+                <ul class="list-unstyled collapse in" id="cstMenu">
+                    <li class="active"><a href="#/content/html/0"><i class="glyphicon "></i> HTML</a></li>
+                    <li><a href="#/content/css/0"><i class="glyphicon "></i> CSS </a></li>
+                    <li><a href="#/content/js/0"><i class="glyphicon "></i> JavaScript</a></li>
+                    <li>
+                        <a class="no-underline" data-toggle="collapse" data-parent="#accordion" href="#jslMenu"
+                           aria-expanded="true" aria-controls="jslMenu" onclick="return false;">
+                            <h5><i class="glyphicon "></i> JS Libraries<i class="glyphicon glyphicon-chevron-down"
+                                                                          style="float:right"></i></h5>
+                        </a>
+                        <ul class="list-unstyled collapse" id="jslMenu">
+                            <li class="active"><a href="#/content/jq/0"><i class="glyphicon"></i> jQuery </a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="no-underline" data-toggle="collapse" data-parent="#accordion" href="#jsfMenu"
+                           aria-expanded="true" aria-controls="jsfMenu" onclick="return false;">
+                            <h5><i class="glyphicon "></i> JS Frameworks<i class="glyphicon glyphicon-chevron-down"
+                                                                           style="float:right"></i></h5>
+                        </a>
+                        <ul class="list-unstyled collapse" id="jsfMenu">
+                            <li class="active inner-li"><a href="#/content/angular/0"><i class="glyphicon"></i> AngularJS </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </accordion-group>
+        <accordion-group>
+            <accordion-heading><h5 class="pan-heading"><img src="/images/server.png" style="margin-right: 5px;"/>
+                Server-Side Technologies </h5></accordion-heading>
+            <li class="nav-header col-sm-12">
+                <ul class="list-unstyled collapse in" id="sstMenu">
+                    <li class="active"><a href="#"><i class="glyphicon "></i> Java </a></li>
+                    <li><a href="#"><i class="glyphicon "></i> PHP </a></li>
+                    <li><a href="#"><i class="glyphicon "></i> Perl </a></li>
+                    <li><a href="#"><i class="glyphicon "></i> Ruby </a></li>
+                    <li>
+                        <a class="no-underline" data-toggle="collapse" data-parent="#accordion" href="#jlMenu"
+                           aria-expanded="true" aria-controls="jlMenu" onclick="return false;">
+                            <h5><i class="glyphicon "></i> Java Libraries<i class="glyphicon glyphicon-chevron-down"
+                                                                            style="float:right"></i></h5>
+                        </a>
+                        <ul class="list-unstyled collapse" id="jlMenu">
+                            <li class="active"><a href="#"><i class="glyphicon"></i> Java Lib Example</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="no-underline" data-toggle="collapse" data-parent="#accordion" href="#jfMenu"
+                           aria-expanded="true" aria-controls="jfMenu" onclick="return false;">
+                            <h5><i class="glyphicon "></i> Java Frameworks<i class="glyphicon glyphicon-chevron-down"
+                                                                             style="float:right"></i></h5>
+                        </a>
+                        <ul class="list-unstyled collapse" id="jfMenu">
+                            <li class="active"><a href="#"><i class="glyphicon"></i> Java Frameworks Example</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </accordion-group>
+    </accordion>
+</div>
+

@@ -1,0 +1,75 @@
+body {
+    padding-top: 80px;
+    background: #ccc;
+!important
+}
+
+#main {
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+a, a:active, a:focus {
+    outline: none;
+}
+
+.panel-group {
+    background: url(data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==);
+!important
+}
+
+#sidebar, #sidebar a {
+    list-style: none;
+    color: #337ab7;
+}
+
+.col1-color a {
+    color: #337ab7;
+}
+
+.col2-color a {
+    color: #0B6121;
+}
+
+.col3-color a {
+    color: #FF8000;
+}
+
+.page-header {
+    color: #337ab7;
+}
+
+.panel-heading {
+    padding: 0px;
+!important
+}
+
+.pan-heading {
+    padding-left: 15px;
+    background: #fff;
+}
+
+.ex-content {
+    margin-top: 10px;
+}
+
+#add-suite {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.req {
+    color: #ff0000;
+    margin-left: 1%;
+}
+
+.text-angular .btn-group {
+    margin-top: 10px;
+!important
+}
+
+.ta-editor {
+    margin-top: 10px;
+!important
+}

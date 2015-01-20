@@ -1,0 +1,167 @@
+<div class="padding">
+    <div class="full col-sm-12">
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted col1-color">
+                <a><h2>AngularJS - Best Practices</h2></a>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+                1. Directory Structure
+            </div>
+        </div>
+
+        <!--/top story-->
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>Create the directory structure as suggested below in the web server root directory:</p>
+                <label class="row col-sm-12">Stylesheets</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>style/</code> directory to maintain all stylesheet files
+                </p>
+                <label class="row col-sm-12">Images</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>images/</code> directory to maintain all static image
+                    files</p>
+                <label class="row col-sm-12">JS source files</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>scripts/</code> directory to maintain all javascript
+                    source code files</p>
+                <label class="row col-sm-12">JS library dependencies</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>scripts/vendor/</code> directory to maintain all JS
+                    library files</p>
+                <label class="row col-sm-12">Angular JS Controllers</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>scripts/controller/</code> directory to maintain all
+                    AngularJS controller files</p>
+                <label class="row col-sm-12">Angular JS Directives</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>scripts/directives/</code> directory to maintain all
+                    AngularJS custom directive files</p>
+                <label class="row col-sm-12">Angular JS Services</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>scripts/services/</code> directory to maintain all
+                    AngularJS custom service files</p>
+                <label class="row col-sm-12">HTML Angular template files</label>
+
+                <p class="row col-sm-12 ex-content">Use <code>views/</code> directory to maintain all angular HTML
+                    template files</p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+                2. Make the page HTML5 Valid
+            </div>
+        </div>
+
+        <!--/top story-->
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>Prepend “data-“ to all angular directives to make it HTML5 valid.</p>
+                <label class="row col-sm-12">Example</label>
+                <code>&lt;html data-ng-app="ApplicationName"&gt;&lt;/html&gt;</code>
+
+                <p class="row col-sm-12 ex-content">In the above example "data-" is appended to angular "ng-app"
+                    directive.</p>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                3. Declaration of "data-ng-app" attribute
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>Declare “data-ng-app” as <code>&lt;html&gt;</code> element or to a <code>&lt;div&gt;</code> element
+                    to declare the scope of the angular application.</p>
+                <label class="row col-sm-12">Example</label>
+
+                <div class="row col-sm-12">
+                    <code>&lt;html data-ng-app="ApplicationName"&gt;&lt;/html&gt;</code>
+
+                    <p class="row col-sm-12 ex-content">In the above example "data-ng-app" is appended to <code>&lt;html&gt;</code>
+                        element.</p>
+                </div>
+                <div class="row col-sm-12">
+                    <code>&lt;div data-ng-app="ApplicationName"&gt;&lt;/div&gt;</code>
+
+                    <p class="row col-sm-12 ex-content">In the above example "data-ng-app" is appended to <code>&lt;div&gt;</code>
+                        element.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                4. Use custom directives to route header.html and footer.html
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-12">
+                <label class="row col-sm-12">HTML BODY</label>
+
+                <div class="row col-sm-12">
+                    <code>
+                        <pre>
+                            &lt;body&gt;
+                                &lt;my-header&gt;&lt;/my-header&gt;
+                                &lt;div data-ng-view&gt;&lt;/div&gt;
+                                &lt;my-footer&gt;&lt;/my-footer&gt;
+                            &lt;/body&gt;
+                        </pre>
+                    </code>
+                </div>
+                <label class="row col-sm-12">Custom Directive - Header</label>
+
+                <div class="row col-sm-12">
+                    <code>
+                        <pre>
+                            sample_app .directive('myHeader', function() {
+                                return {
+                                    restrict: 'AE',
+                                    templateUrl:'templates/header.html'
+                                }
+                            });
+
+                            sample_app .directive('myFooter', function() {
+                                return {
+                                    restrict: 'AE',
+                                    templateUrl:'templates/footer.html'
+                                }
+                            });
+                        </pre>
+                    </code>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" id="featured">
+            <div class="page-header text-muted">
+                <h5>Related</h5>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-sm-4 text-center col2-color">
+                <a href="#/angularDemo"><h4>Live Demo</h4>
+                    <span class="glyphicon glyphicon-play"></span></a>
+            </div>
+            <div class="col-sm-4 text-center col3-color">
+                <a href="#/angularTroubleshoot"><h4>Troubleshooting</h4>
+                    <span class="glyphicon glyphicon-eye-open"></span></a>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+
+            </div>
+        </div>
+    </div>
+    <!-- /col-9 -->
+</div><!-- /padding -->

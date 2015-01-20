@@ -1,0 +1,258 @@
+<div class="padding">
+    <div class="full col-sm-12">
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted col1-color">
+                <a><h2>Java Script - Best Practices</h2></a>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+              Always Use 'var'  
+            </div>
+        </div>
+
+        <!--/top story-->
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>Variables in javascript either have global scope or function scope, and using the 'var' keyword is vital to keeping them straight. When declaring a 		variable for use either as a global variable or as a function-level variable, always prefix the declaration with the 'var' keyword. The example below 		highlights the potential problem caused by not doing so.</p>
+		
+		<p><b>Problem Caused By Not Using Var</b></p>
+		
+<code><pre>var i=0; // This is good - creates a global variable
+	function test() {
+	  for (i=0; i<10; i++) {
+           alert("Hello World!");
+	  }
+	}
+test();
+alert(i); // The global variable i is now 10!</code></pre>
+
+		<p>Since the variable i inside the function was not declared as a function-level variable by using the 'var' keyword, it references the global variable 			in this example. It is a good idea to always declare global variables using 'var', but it is vital to declare function-scoped variables using 'var'. The 		two approaches below are functionally identical.</p>
+
+		<p><b>Fixed Function</b></p>
+
+<code><pre>function test() {
+var i=0;
+	for (i=0; i<10; i++) {
+	alert("Hello World!");
+	}
+}</pre></code>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                Feature-Detect Rather Than Browser-Detect
+            </div>
+        </div>
+	<div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>Some code is written to detect browser versions and to take different action based on the user agent being used. This, in general, is a very bad 		practice. Any code which even looks at the global "navigator" object is suspect.</p>
+	
+		<p>The better approach is to use feature detection. That is, before using any advanced feature that an older browser may not support, check to see if 		the function or property exists first, then use it. This is better than detecting the browser version specifically, and assuming that you know its 		capabilities.</p>
+
+<code><pre>if (document.getElementById) {
+	var element = document.getElementById('MyId');
+	}
+else {
+	alert('Your browser lacks the capabilities required to run this script!');
+	}</pre></code>
+
+            </div>
+        </div>
+        
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                Use Square Bracket Notation
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>When accessing object properties that are determined at run-time or which contain characters not compatible with dot notation, use square bracket notation. If you are not an experienced javascript programmer, it's not a bad practice to use square bracket notation all the time.</p>
+		<p>Objects properties in javascript can be accessed primarily in two ways: Dot notation and Square bracket notation.</p>
+		<p><b>Dot notation:</b> MyObject.property</p>
+		<p><b>Square bracket notation: </b>MyObject["property"]</p>
+		<p>With dot notation, the property name is hard-coded and cannot be changed at run-time. With bracket notation, the property name is a string which is 		evaluated to resolve the property name. The string can be hard-coded, or a variable, or even a function call which returns a string property name.</p>
+		<p>If a property name is being generated at run-time, the bracket notation is required. For example, if you have properties "value1", "value2", and 		"value3", and want to access the property using a variable i=2:</p>
+		<p><b>This Will Work:</b> MyObject["value"+i]</p>
+		<p><b>This Will Not:</b> MyObject.value+i</p>
+		<p>Also, in some server-side environments (PHP, Struts, etc) form field names are appended with [] to denote that the form field should be treated as an 		array on the server-side. However, referencing a field name containing [] using dot notation will not work because [] is the syntax for reference a 		javascript array. So, square bracket notation is required.</p>
+		<p><b>This Will Work:</b>formref.elements["name[]"]</p>
+		<p><b>This Will Not:</b> formref.elements.name[]</p>
+		<p>The recommendation for using square bracket notation is to always use it when it is required (obviously). Using it when not strictly required is a 				matter of personal preference and convention. One good rule of thumb is to use dot notation to access standard properties of objects, and square bracket 		notation to access properties which are defined as objects in the page. So, while document["getElementById"]() is perfectly vaid using square bracket 				notation, document.getElementById() is the preferred syntax because getElementById is a standard property of the document object as defined in the DOM 				specifications. Mixing the use of dot and square bracket notation makes it clear which properties are standard and which are names defined by the 				content: <b>document.forms["myformname"].elements["myinput"].value</b></p>
+		<p>Here, the forms property is a standard property of document, while the form name myformname is defined by the page content. Likewise, the elements 				property and value property are both defined by the specs, but then myinput name is defined in the page. This syntax is very clear and easy to 		understand and is a recommended convention to follow, but not a strict rule.</p>
+		
+            </div>
+        </div>
+
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                Use onclick In Anchors Instead Of javascript: Pseudo-Protocol
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>When you want to trigger javascript code from an anchor tag, the onclick handler should be used rather than the javascript: pseudo-protocol. The javascript code that runs within the onclick handler must return true or false (or an expression than evalues to true or false) back to the tag itself - if it returns true, then the HREF of the anchor will be followed like a normal link. If it returns false, then the HREF will be ignored. This is why "return false;" is often included at the end of the code within an onclick handler.</p>
+		<p><b>Correct Syntax:</b><code><pre>&lt;a href="javascript_required.html" onclick="doSomething(); return false;"&gt;go&lt;/a&gt;</pre></code></p>
+		<p>In this case, the "doSomething()" function (defined by the user somewhere in the page) will be called when the link is clicked, and then false will be returned. The href will never be followed for javascript-enabled browsers. However, if the browser does not have javascript enabled, the javascript_required.html file will be loaded, where you can inform your user that javascript is required. Often, links will just contain href="#" for the sake of simplicity, when you know for sure that your users will have javascript enabled. This practice is discouraged. It's always a good idea to put a local fall-back page that will be loaded for users with javascript disabled.</p>
+		<p>Sometimes, you want to conditionally follow a link. For example, if a user is navigating away from your form page and you first want to validate that nothing has changed. In this case, your onclick will call a function and it will return a value itself to say whether the link should be followed.</p>
+		<p><b>Conditional Link Following</b><code><pre>&lt;a href="/" onClick="return validate();"&gt;Home&lt;/a&gt;
+
+function validate() {
+	return prompt("Are you sure you want to exit this page?");
+}</pre></code></p>
+		<p>In this case, the validate() function should always return either true or false. True if the user should be allowed to navigate back to the home page, or false if the link should not be followed. This example prompts the user for confirmation, then returns true or false, depending on if the user clicked OK or Cancel.</p>
+		<p>Below are examples of things NOT to do. If you see code like this in your pages, it is not correct and should be fixed.</p>
+		<p><b>What Not To Do</b>
+<code><pre>&lt;a href="javascript:doSomething()"&gt;link&lt;/a>
+&lt;a href="#" onClick="doSomething()"&gt;link&lt;/a&gt;
+&lt;a href="#" onClick="javascript:doSomething();"&gt;link&lt;/a&gt;
+&lt;a href="#" onClick="javascript:doSomething(); return false;"&gt;link&lt;/a&gt;</pre></code>
+            </div>
+        </div>
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                Use The Unary + Operator To TypeConvert To Number
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+                <p>In javascript, the + operator is used for both addition and concatenation. This can cause problems when adding up form field values, for example, since javascript is a non-typed language. Form field values will be treated as strings, and if you + them together, javascript will treat it as concatenation instead of addition.</p>
+
+<p><b>Problematic Example</b>
+<code><pre>&lt;form name="myform" action="[url]"&gt;
+&lt;input type="text" name="val1" value="1"&gt;
+&lt;input type="text" name="val2" value="2"&gt;
+&lt;/form&gt;
+
+function total() {
+	var theform = document.forms["myform"];
+	var total = theform.elements["val1"].value + theform.elements["val2"].value;
+	alert(total); // This will alert "12", but what you wanted was 3!
+}</pre></code></p>
+		<p>To fix this problem, Javascript needs a hint to tell it to treat the values as numbers, rather than strings. You can use the unary + operator to convert the string value into a number. Prefixing a variable or expression with + will force it to evaluate as a number, which can then be successfully used in a math operation.</p>
+<p><b>Fixed Example</b>
+<code><pre>function total() {
+	var theform = document.forms["myform"];
+	var total = (+theform.elements["val1"].value) + (+theform.elements["val2"].value);
+	alert(total); // This will alert 3
+}</pre></code>
+            </div>
+        </div>
+
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+              Don't Use HTML Comments In Script Blocks  
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+		<p>In the ancient days of javascript (1995), some browsers like Netscape 1.0 didn't have any support or knowledge of the script tag. So when javascript was first released, a technique was needed to hide the code from older browsers so they wouldn't show it as text in the page. The 'hack' was to use HTML comments within the script block to hide the code.</p>
+
+		<p><b>Using HTML Comments In Script Is Bad</b>
+<code><pre>&lt;script language="javascript"&gt;>
+&lt;!--
+   // code here
+//--&gt;
+&lt;/script&gt;</pre></code></p>
+		
+		<p>No browsers in common use today are ignorant of the <script> tag, so hiding of javascript source is no longer necessary. In fact, it can be considered harmful for the following reasons:</p>
+
+	<ul>
+	<li>Within XHTML documents, the source will actually be hidden from all browsers and rendered useless</li>
+	<li> -- is not allowed within HTML comments, so any decrement operations in script are invalid</li>
+	</ul>
+	    </div>
+	</div>
+
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+               Avoid Cluttering The Global Namespace 
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+		<p>Global variables and functions are rarely required. Using globals may cause naming conflicts between javascript source files and cause code to break. For this reason, it is a good practice to encapsulate functionality within a single global namespace.</p>
+		<p>There are several ways to accomplish this task, some of which are much more complicated than others. The simplest approach is to create a single global object and assign properties and methods to this object.</p>
+		
+		<p><b>Creating A Namespace</b>
+<code><pre>var MyLib = {}; // global Object cointainer
+MyLib.value = 1;
+MyLib.increment = function() { MyLib.value++; }
+MyLib.show = function() { alert(MyLib.value); }
+
+MyLib.value=6;
+MyLib.increment();
+MyLib.show(); // alerts 7</pre><code></p>
+		
+		<p>Namespaces can also be created using Closures, and Private Member Variables can also be simulated in javascript.</p>
+	    </div>
+	</div>
+
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+                Avoid sync "Ajax" calls
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+		<p>When making "Ajax" requests, you may choose either async or sync mode. Async mode runs the request in the background while other browser activities can continue to process. Sync mode will wait for the request to return before continuing.</p>
+		<p>Requests made with sync mode should be avoided. These requests will cause the browser to lock up for the user until the request returns. In cases where the server is busy and the response takes a while, the user's browser (and maybe OS) will not allow anything else to be done. In cases where a response is never properly received, the browser may continue to block until the request is timed out.</p>
+		<p>If you think that your situation requires sync mode, it is most likely time to re-think your design. Very few (if any) situations actually require Ajax requests in sync mode.</p>
+	    </div>
+	</div>
+	
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+               Use Correct <script> Tags 
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+		<p>The LANGUAGE attribute is deprecated in the <script> tag. The proper way to create a javascript code block is:
+<code><pre><script type="text/javascript">
+// code here
+</script></pre></code></p>
+	    </div>
+	</div>
+
+	<div class="col-sm-12">
+            <div class="page-header text-muted divider">
+               Use JSON 
+            </div>
+        </div>
+        <div class="row col-sm-12">
+            <div class="col-sm-10">
+		<p>When storing data structures as plain text or sending/retrieving data structures via Ajax, use JSON instead of XML when possible. JSON (JavaScript Object Notation) is a more compact and efficient data format, and is language-neutral.</p>
+	    </div>
+	</div>
+
+        <div class="col-sm-12" id="featured">
+            <div class="page-header text-muted">
+                <h5>Related</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4 text-center col2-color">
+                <a href="#/jsDemo"><h4>Live Demo</h4>
+                    <span class="glyphicon glyphicon-play"></span></a>
+            </div>
+            <div class="col-sm-4 text-center col3-color">
+                <a href="#/jsTroubleshoot"><h4>Troubleshooting</h4>
+                    <span class="glyphicon glyphicon-eye-open"></span></a>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+
+            </div>
+        </div>
+    </div>
+    <!-- /col-9 -->
+</div><!-- /padding -->
