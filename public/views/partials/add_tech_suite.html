@@ -1,40 +1,35 @@
 <div class="padding" data-ng-controller="addController">
     <div class="full col-sm-12">
-	<nav class="navbar navbar-default navbar-static-top col-sm-14">
-      <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
-      <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="bs-example-navbar-collapse-8" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="home.html#/addSuite">Add Article</a></li>
-            <li><a href="home.html#/listArticles">List Articles</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div>
-    </nav>
-
+        <div article-nav></div>
+        <div class="alert alert-success" role="alert" data-ng-show="addArticleSuccess">Article Added Successfully</div>
         <form name="addSuite">
             <div id="prod-details-view">
                 <div class="form-group col-sm-12">
-                    <label class="col-sm-3 control-label">Article Name <span class="req">*</span></label>
+                    <label class="col-sm-3 control-label">Article Name <span class="text-danger">*</span></label>
+
                     <div class="col-xs-6">
-                        <input type="text" class="form-control" placeholder="Article Name" data-ng-model="techsuite.articleTitle" required>
+                        <input type="text" class="form-control" placeholder="Article Name"
+                               data-ng-model="techsuite.articleTitle" required>
                     </div>
                     <div style="clear:both"></div>
                 </div>
                 <div class="form-group col-sm-12">
                     <label class="col-sm-3 control-label">Technology</label>
+
                     <div class="col-xs-6">
-						<select class="form-control" data-ng-options="option.techName for option in techOptions" data-ng-model="techsuite.tech"></select>
+                        <select class="form-control" data-ng-options="option.techName for option in techOptions"
+                                data-ng-model="techsuite.tech"></select>
                     </div>
-					  <a ng-click="toggleModal()" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i></a>
-					  <!-- <a ng-click="toggleDeleteModal()" class="btn btn-primary"><i class="glyphicon glyphicon-trash"></i></a> -->
+                      <a ng-click="toggleModal()" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i></a>
+                     <a ng-click="toggleDeleteModal()" class="btn btn-primary"><i class="glyphicon glyphicon-trash"></i></a> 
                     <div style="clear:both"></div>
                 </div>
                 <div class="form-group col-sm-12">
                     <label class="col-sm-3 control-label">Category</label>
+
                     <div class="col-xs-6">
-                        <select class="form-control" data-ng-options="option.name for option in category" data-ng-model="techsuite.category"></select>
+                        <select class="form-control" data-ng-options="option.name for option in category"
+                                data-ng-model="techsuite.category"></select>
                     </div>
                     <div style="clear:both"></div>
                 </div>
@@ -55,38 +50,38 @@
         </form>
         <div class="col-sm-12">
             <div class="page-header text-muted">
-
             </div>
         </div>
-		
-	<modal title="Add Technology" visible="showModal">
-	<div class="alert alert-success" role="alert" data-ng-show="addTechSuccess">Technology Added Successfully</div>
-    <form role="form">
-      <div class="form-group">
-        <label for="name">Technology Name</label>
-        <input type="text" class="form-control" pattern="[A-Za-z0-9]+" data-ng-model="techdetails.techName" placeholder="Technology Name" />
-      </div>
-      <div class="form-group">
-        <label for="techClass">Class</label>
-		<select class="form-control" data-ng-options="option.name for option in techClassOptions" data-ng-model="techdetails.class"></select>
-      </div>
-      <div class="form-group">
-        <label for="techClass">Type</label>
-		<select class="form-control" data-ng-options="option.name for option in techType" data-ng-model="techdetails.techType"></select>
-      </div>	  
-      <button type="submit" data-ng-click="addTechnology()" class="btn btn-primary">Add</button>
-    </form>
-  </modal>
-  
-  <modal title="Delete Technology" visible="showDeleteModal">
-    <form role="form">
-      <div class="form-group">
-        <label for="name">Do you want to delete "{{ techsuite.tech.techName}}" technology ?</label>
-      </div>
-      <button type="submit" data-ng-click="deleteTechnology()" class="btn btn-primary">Confirm</button>
-    </form>
-  </modal>
-  
+        <modal title="Add Technology" visible="showModal">
+            <div class="alert alert-success" role="alert" data-ng-show="addTechSuccess">Technology Added Successfully
+            </div>
+            <form role="form">
+                <div class="form-group">
+                    <label>Technology Name</label>
+                    <input type="text" class="form-control" pattern="[A-Za-z0-9]+" data-ng-model="techdetails.techName"
+                           placeholder="Technology Name"/>
+                </div>
+                <div class="form-group">
+                    <label>Class</label>
+                    <select class="form-control" data-ng-options="option.name for option in techClassOptions"
+                            data-ng-model="techdetails.class"></select>
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select class="form-control" data-ng-options="option.name for option in techType"
+                            data-ng-model="techdetails.techType"></select>
+                </div>
+                <button type="submit" data-ng-click="addTechnology()" class="btn btn-primary">Add</button>
+            </form>
+        </modal>
+        <modal title="Delete Technology" visible="showDeleteModal">
+            <form role="form">
+                <div class="form-group">
+                    <label>Do you want to delete "{{ techsuite.tech.techName}}" technology ?</label>
+                </div>
+                <button type="submit" data-ng-click="deleteTechnology()" class="btn btn-primary">Confirm</button>
+            </form>
+        </modal>
     </div>
     <!-- /col-9 -->
 </div><!-- /padding -->

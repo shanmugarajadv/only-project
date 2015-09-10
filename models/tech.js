@@ -7,8 +7,8 @@ var Schema = mongoose.Schema;
 
 var techSchema = new Schema({
     techName: {type: String, unique: true},
-	class: String,
-	type: String,
+    class: String,
+    type: String,
     createdOn: Date,
     lastModified: Date
 });

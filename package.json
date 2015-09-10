@@ -15,6 +15,13 @@
     "jade": "~1.6.0",
     "mongodb": "*",
     "mongoose": "*",
-    "connect": "*"
+    "connect": "*",
+	"serve-static": "*",
+	"serve-index": "*",
+	"finalhandler": "*",
+	"multer": "*",
+    "parseurl" : "*",
+    "escape-html": "*",
+    "send" : "*"
   }
 }

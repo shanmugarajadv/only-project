@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var article = require('../lib/article.js');
+var developer = require('../lib/developer.js');
 var tech = require('../lib/tech.js');
 var category = require('../lib/category.js');
 var techType = require('../lib/techType.js');
@@ -23,7 +24,12 @@ router.post('/article', article.addArticle);
 router.get('/article', article.getArticles);
 router.get('/article/:id', article.getArticle);
 router.get('/article/:id/:category', article.getArticleCriteria);
+router.get('/article/:id/:category/:list', article.getArticlePageCriteria);
+router.get('/article/:id/:category/:list/:entries', article.getArticleContentCriteria);
 router.put('/article', article.updateArticle);
 router.delete('/article/:id', article.deleteArticle);
+
+router.post('/developers', developer.addDeveloperDetails);
+router.get('/developers/:projectName', developer.getDeveloperCriteria);
 
 module.exports = router;

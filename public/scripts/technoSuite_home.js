@@ -1,22 +1,33 @@
-var technoSuite = angular.module('technoSuite', ['ngRoute', 'ui.bootstrap', 'textAngular', 'ngResource', 'ngSanitize']);
+var technoSuite = angular.module('technoSuite', ['ngRoute', 'ui.bootstrap', 'textAngular', 'ngResource', 'ngSanitize', 'angularFileUpload']);
 
+/**
+ * Configure routing to map different views to different URLs
+ */
 technoSuite.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
-			when('/content/:name/:category', {
+            when('/content/:name/:category', {
                 templateUrl: 'partials/content.html',
-                controller: 'mainController'			
-			}).
+                controller: 'contentController'
+            }).
             when('/addSuite', {
                 templateUrl: 'partials/add_tech_suite.html',
-                controller: 'mainController'
+                controller: 'addController'
+            }).
+            when('/editArticle/:name', {
+                templateUrl: 'partials/edit_tech_suite.html',
+                controller: 'editController'
             }).
             when('/listArticles', {
                 templateUrl: 'partials/list_articles.html',
                 controller: 'listController'
-            }).			
+            }).
+            when('/addDevelopers', {
+                templateUrl: 'partials/add_developers.html',
+                controller: 'addDevelopersController'
+            }).            
             otherwise({
-                redirectTo: "/content/html/0"
+                redirectTo: "/content/HTML/0"
             });
 
     }]);

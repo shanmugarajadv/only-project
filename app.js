@@ -6,12 +6,66 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var serveIndex = require('serve-index');
+var serveStatic = require('serve-static');
 var app = express();
+var documents = require('./lib/documents.js');
+var multer = require('multer');
+var done       =       false;
+var fileUploadPath = "./uploads/";
+var newDest="";
+var fs = require('fs');
 
-// uncomment after placing your favicon in /public
+app.use(multer({ dest: fileUploadPath,
+changeDest: function(dest, req, res){
+ var url=(req.url).toString();
+ var filePath=url.split("/");
+ // console.log("1"+filePath.length+"2"+filePath[2]+"3"+     	(req.url.toString()));
+ // console.log("Req param"+req.url);
+ dest+=filePath[filePath.length-1];
 
-app.set('port', process.env.PORT || 8000);
+  if (!fs.existsSync(dest)){
+    fs.mkdirSync(dest);
+  }
+
+ newDest=filePath[filePath.length-1];
+ return dest;
+    },
+
+ rename: function (fieldname, filename) {
+    return filename+Date.now();
+  },
+
+onFileUploadStart: function (file,req,res) {
+
+  console.log(file.originalname + ' is starting ...')
+},
+
+onFileUploadComplete: function (file) {
+ /* var document={};
+ document.docName=file.path;
+ document.techName=newDest;
+ documents.addDocuments(document);
+ console.log(file.fieldname + ' uploaded to  ' + file.path); */
+ done=true;
+}
+}).array('multiInputFileName'));
+
+
+app.post('/documents', documents.addDocuments);
+app.get('/',function(req,res){
+      res.sendfile("index.html");
+});
+
+app.post('/upload/:name',function(req,res){
+
+  if(done==true){
+    console.log(req.files);
+    res.send("File uploaded.");
+  }
+});
+
+app.set('port', process.env.PORT || 8001);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,6 +77,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', serveIndex(__dirname + '/uploads'));
+app.use('/uploads', serveStatic(__dirname + '/uploads'));
 app.use('/', routes);
 app.use('/users', users);
 
@@ -32,6 +88,7 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
+
 
 // error handlers
 

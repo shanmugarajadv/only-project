@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var articleSchema = new Schema({
-    articleName: {type: String, unique: true},
+    articleName: {type: String},
     techName: String,
     category: String,
     description: String,

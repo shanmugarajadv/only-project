@@ -1,64 +1,61 @@
-<div class="padding" data-ng-controller="addController">
+<div class="padding" data-ng-controller="listController">
     <div class="full col-sm-12">
-	<nav class="navbar navbar-default navbar-static-top col-sm-14">
-      <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
-      <div class="container-fluid">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="bs-example-navbar-collapse-8" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="home.html#/addSuite">Add Article</a></li>
-            <li class="active"><a href="home.html#/listArticles">List Articles</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div>
-    </nav>
-    <div class="table-head">
-        <span>{{filtered.length}} records found in the table.</span>
-    </div>
-    <div id="prod-table" class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-            <th data-ng-click="changeSorting('productId')">
-                <label> Article Name</label><span data-ng-class="selectedCls('productId')"></span>
-            </th>
-            <th data-ng-click="changeSorting('productName')">
-                <label> Technology </label><span data-ng-class="selectedCls('productName')"></span>
-            </th>
-            <th data-ng-click="changeSorting('vendor')">
-                <label> Category </label><span data-ng-class="selectedCls('vendor')"></span>
-            </th>
-            <th data-ng-click="changeSorting('quantity')">
-                <label> Updated At </label><span data-ng-class="selectedCls('quantity')"></span>
-            </th>
-            <th>
-                <label> Edit/Delete </label>
-            </th>
-            </thead>
-            <tbody data-ng-show="(filtered = (articles | filter:searchName | orderBy:sort.column:sort.descending))">
-            <tr data-ng-repeat="article in filtered">
-                <td>{{article.articleName}}</td>
-                <td>{{article.techName}}</td>
-                <td>{{article.category}}</td>
-                <td>{{article.lastModified | date:'MM-dd-yyyy HH:mm:ss Z'}}</td>
-                <td class="edit-delete">
-                    <a data-ng-href='#/view/{{product.productId}}'><span class="glyphicon glyphicon-list-alt"
-                                                                         title="View"></span></a>
-                    <a data-ng-href='#/edit/{{product.productId}}'><span class="glyphicon glyphicon-pencil"
-                                                                         title="Edit"></span></a>
-                    <a data-ng-href="#" data-ng-click="remove($index)"><span class="glyphicon glyphicon-remove"
-                                                                             title="Delete"></span></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-        
-        <div class="col-sm-12">
-            <div class="page-header text-muted">
-
+        <div article-nav></div>
+        <div class="alert alert-success">
+            <span>{{totalItems}} {{articleString}} present.</span>
+            <!-- <div class="col-sm-1 pull-right"><button class="btn btn-success btn-sm">Search</button></div> -->
+            <div class="col-sm-3 pull-right">
+                <input class="form-control input-sm" type="search" data-ng-model="searchName" data-ng-minlength="2"
+                       placeholder="Search Article"/>
+            </div>
+            <div class="col-sm-5 pull-right">
+                <pagination boundary-links="true" items-per-page="entries" max-size="maxSize" total-items="totalItems"
+                            ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                            last-text="&raquo;"></pagination>
             </div>
         </div>
-		
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <th data-ng-click="changeSorting('articleName')">
+                    <label> Article Name</label><span data-ng-class="selectedCls('articleName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('techName')">
+                    <label> Technology </label><span data-ng-class="selectedCls('techName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('category')">
+                    <label> Category </label><span data-ng-class="selectedCls('category')"></span>
+                </th>
+                <th data-ng-click="changeSorting('lastModified')">
+                    <label> Updated At </label><span data-ng-class="selectedCls('lastModified')"></span>
+                </th>
+                <th>
+                    <label> Edit/Delete </label>
+                </th>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="article in (filtered = (articles | filter:searchName | orderBy:sort.column:sort.descending))">
+                    <td>{{article.articleName}}</td>
+                    <td>{{article.techName}}</td>
+                    <td>{{article.category}}</td>
+                    <td>{{article.lastModified | date:'MM-dd-yyyy HH:mm:ss Z'}}</td>
+                    <td class="edit-delete col-sm-1">
+                        <a data-ng-href='#/editArticle/{{article.articleName}}' class="col-sm-1"><span
+                                class="glyphicon glyphicon-pencil"
+                                title="Edit"></span></a>
+                        <a data-ng-href="#/listArticles" data-ng-click="remove(article.articleName)"
+                           class="col-sm-1"><span class="glyphicon glyphicon-remove"
+                                                  title="Delete"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+            </div>
+        </div>
     </div>
     <!-- /col-9 -->
 </div><!-- /padding -->

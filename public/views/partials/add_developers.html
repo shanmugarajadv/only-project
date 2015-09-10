@@ -1,0 +1,123 @@
+<div class="padding" data-ng-controller="addDevelopersController">
+    <div class="full col-sm-12">
+		<div project-nav></div>
+        <form name="addDevelopers">
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Project Name <span class="text-danger">*</span></label>
+
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" data-ng-model="projectDetails.projectName" disabled>
+                    </div>
+                    
+                    <button ng-click="toggleModal()" class="btn btn-primary">Add a Developer</button>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Developers List</label>
+                    <div style="clear:both"></div>
+                </div> 
+        <div class="form-group col-sm-12 table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <th data-ng-click="changeSorting('articleName')">
+                    <label> Developer Name</label><span data-ng-class="selectedCls('articleName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('techName')">
+                    <label> Developer Id </label><span data-ng-class="selectedCls('techName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('lastModified')">
+                    <label> Added On </label><span data-ng-class="selectedCls('lastModified')"></span>
+                </th>
+                <th>
+                    <label> Edit/Delete </label>
+                </th>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="developer in developersList">
+                    <td><input type="text" class="form-control" placeholder="Project Name"
+                               data-ng-model="developer.name" disabled> {{}}</td>
+                    <td>{{developer.id}}</td>
+                    <td>{{developer.createdOn}}</td>
+                    <td class="edit-delete col-sm-1">
+                        <a data-ng-href='#/editArticle/{{article.articleName}}' class="col-sm-1"><span
+                                class="glyphicon glyphicon-pencil"
+                                title="Edit"></span></a>
+                        <a data-ng-href="#/listArticles" data-ng-click="remove(article.articleName)"
+                           class="col-sm-1"><span class="glyphicon glyphicon-remove"
+                                                  title="Delete"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </form>
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+            </div>
+        </div>
+    </div>
+       <modal title="Add Developer" visible="showModal">
+            <div class="alert alert-success" role="alert" data-ng-show="addDeveloperSuccess">Developer Added Successfully
+            </div>
+            <form role="form">
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3">Developer Name <span class="text-danger">*</span></label>
+                    <div class="col-xs-6">
+                    <input type="text" class="form-control" pattern="[A-Za-z0-9]+" data-ng-model="developerRoleMap.developerName"
+                           placeholder="Developer Name" required />
+                    </div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3">Developer ID <span class="text-danger">*</span></label>
+                    <div class="col-xs-6">
+                    <input type="text" class="form-control" pattern="[A-Za-z0-9]+" data-ng-model="developerRoleMap.developerID"
+                           placeholder="Developer ID" required />
+                    </div>
+                </div>                
+                <div class="form-group col-sm-12">
+					<div class="page-header">
+                    <label class="col-sm-10">Roles List</label>
+                    <button type="submit" title="Add Role" data-ng-click="addRole('')" class="btn btn-primary">Add Role</button>
+                    </div>
+        <div class="form-group col-sm-12 table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <th data-ng-click="changeSorting('articleName')">
+                    <label> Role </label><span data-ng-class="selectedCls('articleName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('techName')">
+                    <label> Effort Percentage </label><span data-ng-class="selectedCls('techName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('lastModified')">
+                    <label> Start Date </label><span data-ng-class="selectedCls('lastModified')"></span>
+                </th>
+                <th data-ng-click="changeSorting('lastModified')">
+                    <label> End Date </label><span data-ng-class="selectedCls('lastModified')"></span>
+                </th>                
+                <th>
+                    <label> Edit/Delete </label>
+                </th>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="role in developerRoleMap.roles">
+                    <td><input type="text" class="form-control" pattern="[A-Za-z0-9]+" data-ng-model="role.role" required /></td>
+                    <td><input type="number" class="form-control" min="10" max="100" step="10" data-ng-model="role.efforPercent" required /></td>
+                    <td><input type="datetime" class="form-control" data-ng-model="role.startDate"/></td>
+                    <td><input type="datetime" class="form-control" data-ng-model="role.endDate"/></td>
+                    <td class="edit-delete col-sm-2">			
+                        <a data-ng-click="deleteRole(role.role)"
+                           class="col-sm-1"><span class="glyphicon glyphicon-remove"
+                                                  title="Delete"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>                    
+                    <div style="clear:both"></div>
+                </div>                  
+                <button type="submit" data-ng-click="addDeveloper()" class="btn btn-primary">Add</button>
+            </form>
+            </div>
+        </modal>    
+    <!-- /col-9 -->
+</div><!-- /padding -->

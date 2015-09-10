@@ -1,0 +1,56 @@
+<div class="padding" data-ng-controller="editController">
+    <div class="full col-sm-12">
+        <div article-nav></div>
+        <div class="alert alert-success" role="alert" data-ng-show="editArticleSuccess">Article Updated Successfully
+        </div>
+        <form name="addSuite">
+            <div id="prod-details-view">
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Article Name</label>
+
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" data-ng-model="techsuite.articleTitle"
+                               disabled="disabled">
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Technology</label>
+
+                    <div class="col-xs-6">
+                        <select class="form-control" data-ng-options="option.techName as option.techName for option in techOptions"
+                                data-ng-model="techsuite.tech"></select>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Category</label>
+
+                    <div class="col-xs-6">
+                        <select class="form-control" data-ng-options="option.name as option.name for option in category"
+                                data-ng-model="techsuite.category"></select>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-14 text-angular">
+                    <text-angular data-ng-model="techsuite.articlecontent" required></text-angular>
+                </div>
+                <div class="form-group row top-buffer">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button type="submit" class="btn btn-primary" data-ng-disabled="addSuite.$invalid"
+                                data-ng-click="updateDetails()">Save
+                        </button>
+                        <a class="col-sm-offset-2" href="home.html">
+                            <button type="submit" class="btn btn-primary">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+            </div>
+        </div>
+    </div>
+    <!-- /col-9 -->
+</div><!-- /padding -->
