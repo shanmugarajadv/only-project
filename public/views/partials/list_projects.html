@@ -1,0 +1,62 @@
+<div class="padding" data-ng-controller="addProjectsController">
+    <div class="full col-sm-12">
+        <div project-nav></div>
+        <div class="alert alert-success">
+            <span>{{projectsList.length}} {{projectString}} present.</span>
+            <!-- <div class="col-sm-1 pull-right"><button class="btn btn-success btn-sm">Search</button></div> -->
+            <div class="col-sm-3 pull-right">
+                <input class="form-control input-sm" type="search" data-ng-model="searchName" data-ng-minlength="2"
+                       placeholder="Search Projects"/>
+            </div>
+            <div class="col-sm-5 pull-right">
+                <pagination boundary-links="true" items-per-page="entries" max-size="maxSize" total-items="totalItems"
+                            ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm"
+                            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                            last-text="&raquo;"></pagination>
+            </div>
+        </div>
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <th data-ng-click="changeSorting('projectName')">
+                    <label> Project Name</label><span data-ng-class="selectedCls('projectName')"></span>
+                </th>
+                <th data-ng-click="changeSorting('projectStatus')">
+                    <label> Status </label><span data-ng-class="selectedCls('projectStatus')"></span>
+                </th>
+                <th data-ng-click="changeSorting('projectManager')">
+                    <label> Project Manager </label><span data-ng-class="selectedCls('projectManager')"></span>
+                </th>
+                <th data-ng-click="changeSorting('uatDate')">
+                    <label> UAT Date </label><span data-ng-class="selectedCls('uatDate')"></span>
+                </th>
+                <th data-ng-click="changeSorting('prdDate')">
+                    <label> PRD Date </label><span data-ng-class="selectedCls('prdDate')"></span>
+                </th>
+                <th>
+                    <label> Edit/Delete </label>
+                </th>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="project in (filtered = (projectsList | filter:searchName | orderBy:sort.column:sort.descending))">
+                    <td>{{project.projectName}}</td>
+                    <td>{{project.projectStatus}}</td>
+                    <td>{{project.projectManager}}</td>
+                    <td>{{project.uatDate}}</td>
+                    <td>{{project.prdDate}}</td>
+                    <td class="edit-delete col-sm-1">
+                        <a data-ng-href="#/listProjects" data-ng-click="remove(project.projectName)"
+                           class="col-sm-1"><span class="glyphicon glyphicon-remove"
+                                                  title="Delete"></span></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+            </div>
+        </div>
+    </div>
+    <!-- /col-9 -->
+</div><!-- /padding -->

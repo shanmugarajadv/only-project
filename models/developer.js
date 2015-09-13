@@ -6,8 +6,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var developerSchema = new Schema({
-    projectName: String,
+    projectName: {type: String},
     developerName: String,
+    developerID: String,
     role: String,
     startDate: Date,
     endDate: Date,

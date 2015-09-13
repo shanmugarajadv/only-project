@@ -1,0 +1,113 @@
+<div class="padding" data-ng-controller="addProjectsController">
+    <div class="full col-sm-12">
+        <div project-nav></div>
+        <div class="alert alert-success" role="alert" data-ng-show="addProjectsSuccess">Projects Details Added
+            Successfully
+        </div>
+        <form name="projects">
+            <div id="prod-details-view">
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Project Name <span class="text-danger">*</span></label>
+
+                    <div class="col-xs-6">
+                        <input type="text" pattern="[a-zA-Z0-9\s]+" class="form-control" placeholder="Project Name"
+                               data-ng-model="projectDetails.projectName" required>
+                    </div>
+
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Status</label>
+
+                    <div class="col-xs-3">
+                        <select class="form-control" data-ng-options="option.name for option in projectStatus"
+                                data-ng-model="projectDetails.selectedStatus"></select>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Start Date <span class="text-danger">*</span></label>
+        <div class="col-xs-3">
+            <p class="input-group">
+              <input type="date" class="form-control" datepicker-popup ng-model="projectDetails.startDate" is-open="calendarState.startDate.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        
+                    <label class="col-sm-2 control-label">SIT Date <span class="text-danger">*</span></label>
+                    
+        <div class="col-xs-3">
+            <p class="input-group">
+              <input type="date" class="form-control" datepicker-popup ng-model="projectDetails.sitDate" is-open="calendarState.sitDate.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'sitDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">UAT Date <span class="text-danger">*</span></label>
+
+        <div class="col-xs-3">
+            <p class="input-group">
+              <input type="date" class="form-control" datepicker-popup ng-model="projectDetails.uatDate" is-open="calendarState.uatDate.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'uatDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+                    <label class="col-sm-2 control-label">PRD Date <span class="text-danger">*</span></label>
+        <div class="col-xs-3">
+            <p class="input-group">
+              <input type="date" class="form-control" datepicker-popup ng-model="projectDetails.prdDate" is-open="calendarState.prdDate.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'prdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Project Manager <span class="text-danger">*</span></label>
+
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" placeholder="Project Manager"
+                               data-ng-model="projectDetails.projectManager" required>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group col-sm-12">
+                    <label class="col-sm-3 control-label">Comments</label>
+
+                    <div class="col-xs-8">
+                        <textarea rows="4" cols="100" class="form-control" placeholder="Comments"
+                                  data-ng-model="projectDetails.comments">
+
+                        </textarea>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div class="form-group row top-buffer">
+                    <div class="col-sm-offset-4 col-sm-10">
+                        <button type="submit" class="btn btn-primary" data-ng-disabled="projects.$invalid"
+                                data-ng-click="addProjects()">Save
+                        </button>
+                        <a class="col-sm-offset-2" href="home.html">
+                            <button type="submit" class="btn btn-primary">Cancel</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+        <div class="col-sm-12">
+            <div class="page-header text-muted">
+            </div>
+        </div>
+    </div>
+    <!-- /col-9 -->
+</div><!-- /padding -->

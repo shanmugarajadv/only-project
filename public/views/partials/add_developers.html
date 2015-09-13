@@ -6,7 +6,8 @@
                     <label class="col-sm-3 control-label">Project Name <span class="text-danger">*</span></label>
 
                     <div class="col-xs-6">
-                        <input type="text" class="form-control" data-ng-model="projectDetails.projectName" disabled>
+                      <select data-ng-change="getDevelopers()" class="form-control" data-ng-options="option.projectName for option in projectsList"
+                                data-ng-model="selectedProjectDetails"></select>
                     </div>
                     
                     <button ng-click="toggleModal()" class="btn btn-primary">Add a Developer</button>
@@ -34,9 +35,8 @@
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="developer in developersList">
-                    <td><input type="text" class="form-control" placeholder="Project Name"
-                               data-ng-model="developer.name" disabled> {{}}</td>
-                    <td>{{developer.id}}</td>
+                    <td>{{developer.developerName}}</td>
+                    <td>{{developer.developerID}}</td>
                     <td>{{developer.createdOn}}</td>
                     <td class="edit-delete col-sm-1">
                         <a data-ng-href='#/editArticle/{{article.articleName}}' class="col-sm-1"><span
@@ -102,7 +102,13 @@
                 <tr data-ng-repeat="role in developerRoleMap.roles">
                     <td><input type="text" class="form-control" pattern="[A-Za-z0-9]+" data-ng-model="role.role" required /></td>
                     <td><input type="number" class="form-control" min="10" max="100" step="10" data-ng-model="role.efforPercent" required /></td>
-                    <td><input type="datetime" class="form-control" data-ng-model="role.startDate"/></td>
+                    <td>
+            <p class="input-group">
+              <input type="date" class="form-control" datepicker-popup ng-model="role.startDate" is-open="calendarState.startDate.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p></td>
                     <td><input type="datetime" class="form-control" data-ng-model="role.endDate"/></td>
                     <td class="edit-delete col-sm-2">			
                         <a data-ng-click="deleteRole(role.role)"

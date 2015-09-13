@@ -19,9 +19,6 @@
 	"serve-static": "*",
 	"serve-index": "*",
 	"finalhandler": "*",
-	"multer": "*",
-    "parseurl" : "*",
-    "escape-html": "*",
-    "send" : "*"
+	"multer": "*"
   }
 }

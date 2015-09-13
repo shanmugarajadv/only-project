@@ -43,14 +43,14 @@ technoSuite.factory('TechType', function ($resource) {
  */
 technoSuite.factory('Developers', function ($resource) {
     return $resource("/developers/:projectName", {}, {
-        get: {method: "GET"},
+        get: {method: "GET", isArray: true},
         update: {method: 'PUT'}
     });
 });
 
-technoSuite.factory('Role', function ($resource) {
-    return $resource("/role", {}, {
-        get: {method: "GET"},
+technoSuite.factory('Projects', function ($resource) {
+    return $resource("/projects/:id/:category/:list", {}, {
+        get: {method: "GET", isArray: true},
         update: {method: 'PUT'}
     });
 });
